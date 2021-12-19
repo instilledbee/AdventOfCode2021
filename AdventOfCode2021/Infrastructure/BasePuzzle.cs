@@ -5,15 +5,18 @@ namespace AdventOfCode2021.Infrastructure
 
     internal abstract class BasePuzzle
     {
-        public abstract int SolveFirst(StreamReader inputs);
+        public abstract int SolveFirst();
 
-        public abstract int SolveSecond(StreamReader inputs);
+        public abstract int SolveSecond();
 
         protected ILogger Logger { get; init; }
 
-        public BasePuzzle(bool verboseOutput)
+        protected StreamReader Inputs { get; init; }
+
+        public BasePuzzle(bool verboseOutput, StreamReader inputs)
         {
             Logger = verboseOutput ? new ConsoleLogger() : new NullLogger();
+            Inputs = inputs;
         }
     }
 }

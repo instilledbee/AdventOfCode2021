@@ -19,14 +19,13 @@ public static class Program
 
         bool outputVerbose = args.Contains("--verbose");
 
-        var puzzle = FindPuzzle(puzzleId, outputVerbose);
+        var inputs = GetInputs(puzzleId);
+        var puzzle = FindPuzzle(puzzleId, outputVerbose, inputs);
 
         if (puzzle != null)
         {
-            var inputs = GetInputs(puzzleId);
-
-            int solutionA = puzzle.SolveFirst(inputs);
-            int solutionB = puzzle.SolveSecond(inputs);
+            int solutionA = puzzle.SolveFirst();
+            int solutionB = puzzle.SolveSecond();
 
             Console.WriteLine($"Solution to Puzzle #{puzzleId}A: {solutionA}");
             Console.WriteLine($"Solution to Puzzle #{puzzleId}B: {solutionB}");
@@ -38,7 +37,7 @@ public static class Program
         }
 	}
 
-    static BasePuzzle FindPuzzle(int puzzleId, bool outputVerbose)
+    static BasePuzzle FindPuzzle(int puzzleId, bool outputVerbose, StreamReader inputs)
     {
         var matchingPuzzle = Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(t =>
         {
@@ -48,7 +47,7 @@ public static class Program
         });
 
         if (matchingPuzzle != null)
-            return Activator.CreateInstance(matchingPuzzle, args: outputVerbose) as BasePuzzle;
+            return Activator.CreateInstance(matchingPuzzle, args: new object[] { outputVerbose, inputs }) as BasePuzzle;
 
         else
             return null;

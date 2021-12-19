@@ -7,18 +7,18 @@ namespace AdventOfCode2021.Solutions
 	[PuzzleId(1)]
     internal class Puzzle1 : BasePuzzle
     {
-        public Puzzle1(bool verboseOutput) : base(verboseOutput)
+        public Puzzle1(bool verboseOutput, StreamReader inputs) : base(verboseOutput, inputs)
         {
         }
 
-        public override int SolveFirst(StreamReader inputs)
+        public override int SolveFirst()
         {
-			return Solve(inputs, 1);
+			return Solve(Inputs, 1);
 		}
 
-        public override int SolveSecond(StreamReader inputs)
+        public override int SolveSecond()
 		{
-			return Solve(inputs, 3);
+			return Solve(Inputs, 3);
 		}
 
 		private int Solve(StreamReader inputs, int windowSize)

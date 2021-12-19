@@ -17,7 +17,9 @@ public static class Program
             return;
         }
 
-        var puzzle = FindPuzzle(puzzleId);
+        bool outputVerbose = args.Contains("--verbose");
+
+        var puzzle = FindPuzzle(puzzleId, outputVerbose);
 
         if (puzzle != null)
         {
@@ -36,7 +38,7 @@ public static class Program
         }
 	}
 
-    static IPuzzle FindPuzzle(int puzzleId)
+    static BasePuzzle FindPuzzle(int puzzleId, bool outputVerbose)
     {
         var matchingPuzzle = Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(t =>
         {
@@ -46,7 +48,7 @@ public static class Program
         });
 
         if (matchingPuzzle != null)
-            return Activator.CreateInstance(matchingPuzzle) as IPuzzle;
+            return Activator.CreateInstance(matchingPuzzle, args: outputVerbose) as BasePuzzle;
 
         else
             return null;

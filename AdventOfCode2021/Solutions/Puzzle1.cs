@@ -1,17 +1,22 @@
-﻿using AdventOfCode2021.Infrastructure;
+﻿using AdventOfCode2021.Extensions;
+using AdventOfCode2021.Infrastructure;
 using System.Text;
 
 namespace AdventOfCode2021.Solutions
 {
 	[PuzzleId(1)]
-    internal class Puzzle1 : IPuzzle
+    internal class Puzzle1 : BasePuzzle
     {
-		public int SolveFirst(StreamReader inputs)
+        public Puzzle1(bool verboseOutput) : base(verboseOutput)
+        {
+        }
+
+        public override int SolveFirst(StreamReader inputs)
         {
 			return Solve(inputs, 1);
 		}
 
-        public int SolveSecond(StreamReader inputs)
+        public override int SolveSecond(StreamReader inputs)
 		{
 			return Solve(inputs, 3);
 		}
@@ -26,40 +31,40 @@ namespace AdventOfCode2021.Solutions
 			int? previousSum = null;
 			int currentSum;
 
-			inputs.BaseStream.Position = 0;
+			inputs.ResetPosition();
 
 			do
 			{
-				var value = Convert.ToInt32(inputs.ReadLine());
-				values.Enqueue(value);
+				int readValue = Convert.ToInt32(inputs.ReadLine());
+				values.Enqueue(readValue);
 
 				currentSum = values.Sum();
 
 				if (values.Count < windowSize) continue;
 
-				Console.Write(OutputStack(values));
+				Logger.Write(OutputStack(values));
 
 				if (previousSum.HasValue)
 				{
 					if (previousSum > currentSum)
 					{
-						Console.WriteLine(" - decreased");
+						Logger.WriteLine(" - decreased");
 						decreasedCount++;
 					}
 					else if (previousSum < currentSum)
 					{
-						Console.WriteLine(" - increased");
+						Logger.WriteLine(" - increased");
 						increasedCount++;
 					}
 					else
 					{
-						Console.WriteLine(" - no change");
+						Logger.WriteLine(" - no change");
 						noChangeCount++;
 					}
 				}
 				else
 				{
-					Console.WriteLine();
+					Logger.WriteLine();
 				}
 
 				previousSum = currentSum;

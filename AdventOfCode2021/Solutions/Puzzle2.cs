@@ -31,6 +31,8 @@ namespace AdventOfCode2021.Solutions
                         depth -= positionInput.Distance;
                         break;
                 }
+
+                Logger.WriteLine($"{positionInput}\t{horizontalPosition}\t{depth}");
             }
 
             return horizontalPosition * depth;

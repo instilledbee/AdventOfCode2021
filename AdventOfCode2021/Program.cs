@@ -25,9 +25,9 @@ public static class Program
         if (puzzle != null)
         {
             int solutionA = puzzle.SolveFirst();
-            int solutionB = puzzle.SolveSecond();
-
             Console.WriteLine($"Solution to Puzzle #{puzzleId}A: {solutionA}");
+
+            int solutionB = puzzle.SolveSecond();
             Console.WriteLine($"Solution to Puzzle #{puzzleId}B: {solutionB}");
         }
         else

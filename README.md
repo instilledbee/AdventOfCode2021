@@ -6,6 +6,10 @@ Advent of Code 2021 solutions - written in C#/.NET. The aim of this exercise is 
 * The application can be run from the command line with the following parameters: `<puzzle number> [<--verbse>]` e.g.: `AdventOfCode2021.exe 1 --verbose`
   * The first argument, `<puzzle number>` is required and is used to specify which solution to run.
   * The second argument, `--verbose` is optional. Specifying this argument will show more detailed console output for the running solution. Omit the parameter so that the application only outputs the final answer.
+* Note: This repository intentionally does not include any puzzle inputs. To load your own input files:
+  * Create a directory named `Inputs` in the same directory as the `*.exe` file
+  * Place each input file as `<puzzlenumber>.txt`, e.g. `1.txt`, `42.txt`, etc.
+  
 
 ## Solution Structure
 The aim of the solution's structure is to abstract away most of the infrastrctural/cross-cutting concerns so one can easily view the solutions. The project structure is as follows:
